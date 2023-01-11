@@ -65,7 +65,7 @@ export function Catalogue() {
       </table> */}
       <ProductList>
         {products.map((product) => (
-          <ProductCard key={product.id} item={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </ProductList>
     </CatalogueContainer>
