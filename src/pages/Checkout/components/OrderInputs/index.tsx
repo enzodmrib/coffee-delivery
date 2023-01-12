@@ -26,7 +26,7 @@ export function OrderInputs() {
           <Input type="text" placeholder="Complemento" aria-colspan={2} />
           <Input type="text" placeholder="Bairro" required />
           <Input type="text" placeholder="Cidade" required />
-          <Input type="text" placeholder="UF" required />
+          <Input type="text" placeholder="UF" required maxLength={2} />
         </InputsContainer>
       </AddressFormFieldsContainer>
       <PaymentMethodSelect />

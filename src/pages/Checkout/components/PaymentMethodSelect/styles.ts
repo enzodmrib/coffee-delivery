@@ -14,7 +14,11 @@ export const OptionsContainer = styled.div`
   align-items: center;
 `
 
-export const OptionButton = styled.button`
+interface OptionProps {
+  selected: boolean
+}
+
+export const OptionButton = styled.button<OptionProps>`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -27,8 +31,18 @@ export const OptionButton = styled.button`
   text-transform: uppercase;
   line-height: 160%;
 
-  border: none;
+  cursor: pointer;
+  border: ${(props) =>
+    props.selected
+      ? `1px solid ${props.theme.purple}`
+      : '1px solid transparent'};
   border-radius: 6px;
   color: ${(props) => props.theme['base-text']};
   background-color: ${(props) => props.theme['purple-light']};
+
+  transition: background 0.2s, border-color 0.2s;
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
+  }
 `

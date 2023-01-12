@@ -1,8 +1,14 @@
-import { createContext, ReactNode, useReducer } from 'react'
+import { createContext, ReactNode, useReducer, useState } from 'react'
 import { Product } from '../constants/Products'
 
 interface Item extends Product {
   amount: number
+}
+
+export enum PaymentMethods {
+  CREDIT_CARD = 'CREDIT_CARD',
+  DEBT = 'DEBT',
+  MONEY = 'MONEY',
 }
 
 interface CartContextType {
@@ -10,6 +16,8 @@ interface CartContextType {
   addItemToCart: (product: Product, amount: number) => void
   changeItemAmount: (product: Product, amount: number) => void
   removeItem: (product: Product) => void
+  paymentMethod: PaymentMethods
+  changePaymentMethod: (paymentMethod: PaymentMethods) => void
 }
 
 interface CartContextProps {
@@ -19,6 +27,7 @@ interface CartContextProps {
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProps) {
+  const [paymentMethod, setPaymentMethod] = useState(PaymentMethods.CREDIT_CARD)
   const [items, dispatch] = useReducer((state: Item[], action: any) => {
     if (action.type === 'ADD_NEW_ITEM') {
       return [...state, action.payload.item]
@@ -97,11 +106,22 @@ export function CartContextProvider({ children }: CartContextProps) {
     }
   }
 
+  function changePaymentMethod(paymentMethod: PaymentMethods) {
+    setPaymentMethod(paymentMethod)
+  }
+
   // console.log(items)
 
   return (
     <CartContext.Provider
-      value={{ items, addItemToCart, changeItemAmount, removeItem }}
+      value={{
+        items,
+        addItemToCart,
+        changeItemAmount,
+        removeItem,
+        paymentMethod,
+        changePaymentMethod,
+      }}
     >
       {children}
     </CartContext.Provider>
