@@ -35,14 +35,6 @@ export const InputsContainer = styled.div`
   display: grid;
   grid-template-columns: 12.5rem 1fr 3.75rem;
   gap: 1rem;
-
-  input[placeholder='Rua'] {
-    grid-column: 1 / span 3;
-  }
-
-  input[aria-colspan='2'] {
-    grid-column: 2 / span 2;
-  }
 `
 
 export const Input = styled.input`

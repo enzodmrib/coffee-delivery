@@ -1,14 +1,17 @@
 import { MapPinLine } from 'phosphor-react'
+import Input from '../../../../components/Input'
 import { PaymentMethodSelect } from '../PaymentMethodSelect'
 import {
   AddressFormFieldsContainer,
-  Input,
   InputsContainer,
   OrderInputsContainer,
   TextIconContainer,
 } from './styles'
+import { useFormContext } from 'react-hook-form'
 
 export function OrderInputs() {
+  const { register } = useFormContext()
+
   return (
     <OrderInputsContainer>
       <AddressFormFieldsContainer>
@@ -20,13 +23,57 @@ export function OrderInputs() {
           </div>
         </TextIconContainer>
         <InputsContainer>
-          <Input type="number" placeholder="CEP" required />
-          <Input type="text" placeholder="Rua" required aria-colspan={3} />
-          <Input type="number" placeholder="Número" required />
-          <Input type="text" placeholder="Complemento" aria-colspan={2} />
-          <Input type="text" placeholder="Bairro" required />
-          <Input type="text" placeholder="Cidade" required />
-          <Input type="text" placeholder="UF" required maxLength={2} />
+          <Input.Masked
+            id="zip"
+            placeholder="CEP"
+            required
+            maxLength={9}
+            registerField="zip"
+          />
+          <Input.Default
+            id="street"
+            type="text"
+            placeholder="Rua"
+            required
+            aria-colspan={3}
+            registerField="street"
+          />
+          <Input.Default
+            id="number"
+            type="number"
+            placeholder="Número"
+            required
+            registerField="number"
+          />
+          <Input.Optional
+            id="complement"
+            type="text"
+            placeholder="Complemento"
+            aria-colspan={2}
+            registerField="complement"
+          />
+          <Input.Default
+            id="district"
+            type="text"
+            placeholder="Bairro"
+            required
+            registerField="district"
+          />
+          <Input.Default
+            id="city"
+            type="text"
+            placeholder="Cidade"
+            required
+            registerField="city"
+          />
+          <Input.Default
+            id="federationalUnit"
+            type="text"
+            placeholder="UF"
+            required
+            maxLength={2}
+            registerField="federationalUnit"
+          />
         </InputsContainer>
       </AddressFormFieldsContainer>
       <PaymentMethodSelect />

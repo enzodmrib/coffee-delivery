@@ -1,11 +1,11 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 import { useContext } from 'react'
-import { CartContext, PaymentMethods } from '../../../../contexts/CartContext'
+import { OrderContext, PaymentMethods } from '../../../../contexts/OrderContext'
 import { TextIconContainer } from '../OrderInputs/styles'
 import { OptionButton, OptionsContainer, SelectContainer } from './styles'
 
 export function PaymentMethodSelect() {
-  const { paymentMethod, changePaymentMethod } = useContext(CartContext)
+  const { paymentMethod, changePaymentMethod } = useContext(OrderContext)
 
   return (
     <SelectContainer>
