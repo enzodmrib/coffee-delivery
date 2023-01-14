@@ -1,3 +1,18 @@
+import espressoTraditionalImg from '@/assets/coffeeImages/espresso-traditional.svg'
+import espressoAmericanImg from '@/assets/coffeeImages/espresso-american.svg'
+import espressoCreamyImg from '@/assets/coffeeImages/espresso-creamy.svg'
+import espressoColdImg from '@/assets/coffeeImages/espresso-cold.svg'
+import coffeeWithMilkImg from '@/assets/coffeeImages/coffee-with-milk.svg'
+import latteCoffeeImg from '@/assets/coffeeImages/latte-coffee.svg'
+import capuccinoImg from '@/assets/coffeeImages/capuccino.svg'
+import macchiatoImg from '@/assets/coffeeImages/macchiato.svg'
+import mocaccinoImg from '@/assets/coffeeImages/mocaccino.svg'
+import hotChocolateImg from '@/assets/coffeeImages/hot-chocolate.svg'
+import cubanCoffeeImg from '@/assets/coffeeImages/cuban-coffee.svg'
+import havaianCoffeeImg from '@/assets/coffeeImages/havaian-coffee.svg'
+import arabicCoffeeImg from '@/assets/coffeeImages/arabic-coffee.svg'
+import irishCoffeeImg from '@/assets/coffeeImages/irish-coffee.svg'
+
 export interface Product {
   id: number
   name: string
@@ -14,7 +29,7 @@ export const products: Product[] = [
     description: 'O tradicional café feito com água quente e grãos moídos',
     tags: ['tradicional'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/espresso-traditional.svg',
+    imgPath: espressoTraditionalImg,
   },
   {
     id: 2,
@@ -22,7 +37,7 @@ export const products: Product[] = [
     description: 'Expresso diluído, menos intenso que o tradicional',
     tags: ['tradicional'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/espresso-american.svg',
+    imgPath: espressoAmericanImg,
   },
   {
     id: 3,
@@ -30,7 +45,7 @@ export const products: Product[] = [
     description: 'Café expresso tradicional com espuma cremosa',
     tags: ['tradicional'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/espresso-creamy.svg',
+    imgPath: espressoCreamyImg,
   },
   {
     id: 4,
@@ -38,7 +53,7 @@ export const products: Product[] = [
     description: 'Bebida preparada com café expresso e cubos de gelo',
     tags: ['tradicional', 'gelado'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/espresso-cold.svg',
+    imgPath: espressoColdImg,
   },
   {
     id: 5,
@@ -46,7 +61,7 @@ export const products: Product[] = [
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
     tags: ['tradicional', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/coffee-with-milk.svg',
+    imgPath: coffeeWithMilkImg,
   },
   {
     id: 6,
@@ -55,7 +70,7 @@ export const products: Product[] = [
       'Uma dose de café expresso com o dobro de leite e espuma cremosa',
     tags: ['tradicional', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/latte-coffee.svg',
+    imgPath: latteCoffeeImg,
   },
   {
     id: 7,
@@ -64,7 +79,7 @@ export const products: Product[] = [
       'Bebida com canela feita de doses iguais de café, leite e espuma',
     tags: ['tradicional', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/capuccino.svg',
+    imgPath: capuccinoImg,
   },
   {
     id: 8,
@@ -73,7 +88,7 @@ export const products: Product[] = [
       'Café expresso misturado com um pouco de leite quente e espuma',
     tags: ['tradicional', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/macchiato.svg',
+    imgPath: macchiatoImg,
   },
   {
     id: 9,
@@ -81,7 +96,7 @@ export const products: Product[] = [
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
     tags: ['tradicional', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/mocaccino.svg',
+    imgPath: mocaccinoImg,
   },
   {
     id: 10,
@@ -89,7 +104,7 @@ export const products: Product[] = [
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     tags: ['especial', 'com leite'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/hot-chocolate.svg',
+    imgPath: hotChocolateImg,
   },
   {
     id: 11,
@@ -98,7 +113,7 @@ export const products: Product[] = [
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
     tags: ['especial', 'alcoólico', 'gelado'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/cuban-coffee.svg',
+    imgPath: cubanCoffeeImg,
   },
   {
     id: 12,
@@ -106,7 +121,7 @@ export const products: Product[] = [
     description: 'Bebida adocicada preparada com café e leite de coco',
     tags: ['especial'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/havaian-coffee.svg',
+    imgPath: havaianCoffeeImg,
   },
   {
     id: 13,
@@ -114,7 +129,7 @@ export const products: Product[] = [
     description: 'Bebida preparada com grãos de café árabe e especiarias',
     tags: ['especial'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/arabic-coffee.svg',
+    imgPath: arabicCoffeeImg,
   },
   {
     id: 14,
@@ -122,6 +137,6 @@ export const products: Product[] = [
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
     tags: ['especial', 'alcoólico'],
     price: 9.9,
-    imgPath: 'src/assets/coffeeImages/irish-coffee.svg',
+    imgPath: irishCoffeeImg,
   },
 ]
