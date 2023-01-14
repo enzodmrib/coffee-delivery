@@ -18,6 +18,7 @@ export const HomeInfoTitle = styled.div`
     font-size: 3rem;
     line-height: 130%;
     margin-bottom: 1rem;
+    color: ${(props) => props.theme['base-title']};
   }
 
   p {
@@ -42,7 +43,7 @@ export const HomeInfoList = styled.ul`
   }
 `
 
-const ICON_COLORS = {
+export const ICON_COLORS = {
   orange: 'yellow-dark',
   yellow: 'yellow',
   brown: 'base-text',

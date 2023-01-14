@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 import { CartContext, Item } from './CartContext'
 
 export enum PaymentMethods {
@@ -24,8 +25,11 @@ interface Order {
   items: Item[]
 }
 
+interface OrderSummaryData {
+  address: Address
+  paymentMethod: PaymentMethods
+}
 interface OrderContextData {
-  order: Order
   address: Address
   paymentMethod: PaymentMethods
   changePaymentMethod: (paymentMethod: PaymentMethods) => void
@@ -39,31 +43,26 @@ interface OrderContextProps {
 export const OrderContext = createContext({} as OrderContextData)
 
 export function OrderContextProvider({ children }: OrderContextProps) {
-  const { items } = useContext(CartContext)
+  const [address, setAddress] = useLocalStorage(
+    '@coffee-delivery:address-state-1.0.0',
+    {} as Address,
+  )
+  const [paymentMethod, setPaymentMethod] = useLocalStorage(
+    '@coffee-delivery:payment-method-state-1.0.0',
+    PaymentMethods.CREDIT_CARD,
+  )
 
-  const [address, setAddress] = useState({} as Address)
-  const [paymentMethod, setPaymentMethod] = useState(PaymentMethods.CREDIT_CARD)
-  const order: Order = {
-    address,
-    paymentMethod,
-    items,
-    total: items.reduce((acc: number, item) => acc + item.price, 0),
+  function registerAddress(address: Address) {
+    setAddress(address)
   }
 
   function changePaymentMethod(paymentMethod: PaymentMethods) {
     setPaymentMethod(paymentMethod)
   }
 
-  function registerAddress(address: Address) {
-    setAddress(address)
-  }
-
-  console.log(order)
-
   return (
     <OrderContext.Provider
       value={{
-        order,
         address,
         paymentMethod,
         changePaymentMethod,

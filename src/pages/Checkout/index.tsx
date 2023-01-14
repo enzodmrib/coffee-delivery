@@ -4,15 +4,18 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { OrderInputs } from './components/OrderInputs'
-import { SelectedCoffees } from './components/SelectedCoffees'
+import { SelectedItems } from './components/SelectedItems'
 import { Subtotal } from './components/Subtotal'
 
 import {
   CheckoutContainer,
   CheckoutFormContainer,
   CheckoutInfoContainer,
+  SubmitOrderButton,
 } from './styles'
 import { OrderContext } from '../../contexts/OrderContext'
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../contexts/CartContext'
 
 const newOrderFormValidationSchema = zod.object({
   zip: zod.string().length(9),
@@ -27,7 +30,10 @@ const newOrderFormValidationSchema = zod.object({
 type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>
 
 export function Checkout() {
-  const { order, registerAddress } = useContext(OrderContext)
+  const navigate = useNavigate()
+
+  const { items } = useContext(CartContext)
+  const { registerAddress } = useContext(OrderContext)
 
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
@@ -44,16 +50,12 @@ export function Checkout() {
 
   const { handleSubmit } = newOrderForm
 
+  const isSubmitButtonDisabled = items.length === 0
+
   function submitOrder(data: NewOrderFormData) {
     registerAddress(data)
 
-    console.log('Submitted!')
-  }
-
-  function eventHandleSubmit(event: FormEvent) {
-    event.preventDefault()
-
-    console.log('Submitted!', order)
+    navigate('/success')
   }
 
   return (
@@ -66,9 +68,19 @@ export function Checkout() {
 
         <CheckoutInfoContainer>
           <h1>Cafés selecionados</h1>
-          <SelectedCoffees />
+          <SelectedItems />
           <Subtotal />
-          <button type="submit">Confirmar pedido</button>
+          <SubmitOrderButton
+            title={
+              isSubmitButtonDisabled
+                ? 'Não há itens no carrinho'
+                : 'Confirmar pedido'
+            }
+            type="submit"
+            disabled={isSubmitButtonDisabled}
+          >
+            Confirmar pedido
+          </SubmitOrderButton>
         </CheckoutInfoContainer>
       </FormProvider>
     </CheckoutContainer>

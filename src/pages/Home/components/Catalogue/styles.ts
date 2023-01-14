@@ -8,6 +8,7 @@ export const CatalogueTitle = styled.h2`
   font-weight: 800;
   line-height: 130%;
   margin-bottom: 2rem;
+  color: ${(props) => props.theme['base-subtitle']};
 `
 
 export const ProductList = styled.div`

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-export const LayoutContainer = styled.div``
+export const LayoutContainer = styled.div`
+  overflow: hidden;
+`
 
 export const PageContent = styled.div`
   width: 100%;

@@ -47,19 +47,7 @@ export const CardButtons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  span {
-    color: ${(props) => props.theme['base-text']};
-    font-size: 0.875rem;
-    margin-right: 1.438rem;
-  }
-
-  strong {
-    font-size: 1.5rem;
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    line-height: 130%;
-  }
+  gap: 0.5rem;
 
   input {
     border-radius: 6px;
@@ -71,7 +59,7 @@ export const CardButtons = styled.div`
     margin-right: 0.5rem;
   }
 
-  button {
+  button[id='add'] {
     color: ${(props) => props.theme['base-card']};
     background-color: ${(props) => props.theme['purple-dark']};
     border: none;
@@ -79,5 +67,18 @@ export const CardButtons = styled.div`
     padding: 0.5rem;
     height: 2.375rem;
     width: 2.375rem;
+  }
+`
+
+export const CardPriceTag = styled.span`
+  color: ${(props) => props.theme['base-text']};
+  font-size: 0.875rem;
+  margin-right: 0.938rem;
+
+  & > strong {
+    font-size: 1.5rem;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    line-height: 130%;
   }
 `

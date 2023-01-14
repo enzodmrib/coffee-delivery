@@ -15,6 +15,10 @@ export const HeaderElements = styled.div`
   align-items: center;
 
   margin: 0 auto;
+
+  & > img {
+    cursor: pointer;
+  }
 `
 
 export const HeaderImage = styled.img`

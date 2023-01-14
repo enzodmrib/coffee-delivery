@@ -1,14 +1,17 @@
-import { createContext, ReactNode, useReducer, useState } from 'react'
+import { createContext, ReactNode } from 'react'
+import { cartReducer } from '../components/reducers/cart/reducer'
 import { Product } from '../constants/Products'
+import { useLocalStorageWithReducer } from '../hooks/useLocalStorage'
 
 export interface Item extends Product {
   amount: number
 }
 interface CartContextType {
   items: Item[]
+  total: number
   addItemToCart: (product: Product, amount: number) => void
-  changeItemAmount: (product: Product, amount: number) => void
-  removeItem: (product: Product) => void
+  changeItemAmount: (item: Item, amount: number) => void
+  removeItem: (item: Item) => void
 }
 
 interface CartContextProps {
@@ -18,41 +21,17 @@ interface CartContextProps {
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProps) {
-  const [items, dispatch] = useReducer((state: Item[], action: any) => {
-    if (action.type === 'ADD_NEW_ITEM') {
-      return [...state, action.payload.item]
-    }
+  const [items, dispatch] = useLocalStorageWithReducer(
+    '@coffee-delivery:cart-state-1.0.0',
+    cartReducer,
+    [],
+  )
 
-    if (action.type === 'INCREASE_ITEM_AMOUNT') {
-      return state.map((item) => {
-        if (item.id === action.payload.itemId) {
-          return { ...item, amount: item.amount + action.payload.amount }
-        } else {
-          return item
-        }
-      })
-    }
-
-    if (action.type === 'CHANGE_ITEM_AMOUNT') {
-      return state.map((item) => {
-        if (item.id === action.payload.itemId) {
-          return { ...item, amount: action.payload.amount }
-        } else {
-          return item
-        }
-      })
-    }
-
-    if (action.type === 'REMOVE_ITEM') {
-      if (action.payload.amount === 0) {
-        return state.filter((item) => action.payload.itemId !== item.id)
-      }
-    }
-
-    return state
-  }, [])
-
-  const cartItemsIds = items.map((item) => item.id)
+  const total = items.reduce(
+    (acc: number, item: Item) => acc + item.price * item.amount,
+    0,
+  )
+  const cartItemsIds = items.map((item: Item) => item.id)
 
   function addItemToCart(product: Product, amount = 1) {
     if (cartItemsIds.includes(product.id)) {
@@ -73,35 +52,34 @@ export function CartContextProvider({ children }: CartContextProps) {
     }
   }
 
-  function changeItemAmount(product: Product, amount: number) {
-    if (cartItemsIds.includes(product.id)) {
+  function changeItemAmount(item: Item, amount: number) {
+    if (cartItemsIds.includes(item.id)) {
       dispatch({
         type: 'CHANGE_ITEM_AMOUNT',
         payload: {
-          itemId: product.id,
+          itemId: item.id,
           amount,
         },
       })
     }
   }
 
-  function removeItem(product: Product) {
-    if (cartItemsIds.includes(product.id)) {
+  function removeItem(item: Item) {
+    if (cartItemsIds.includes(item.id)) {
       dispatch({
         type: 'REMOVE_ITEM',
         payload: {
-          itemId: product.id,
+          itemId: item.id,
         },
       })
     }
   }
 
-  // console.log(items)
-
   return (
     <CartContext.Provider
       value={{
         items,
+        total,
         addItemToCart,
         changeItemAmount,
         removeItem,
